@@ -1,0 +1,63 @@
+\documentclass[a4paper,10pt]{report}
+
+\usepackage[pdftex,active,tightpage]{preview}
+\setlength\PreviewBorder{2mm}
+\usepackage{pgfgantt}
+\usepackage{pgfcalendar}
+\usepackage{ifthen}
+\usepackage{datetime}
+
+\newdateformat{dashdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+
+\begin{document}
+\begin{preview}
+
+\begin{ganttchart}[
+    x unit=0.06cm,
+    hgrid,
+    vgrid={*{6}{draw=none},dotted},
+    milestone/.append style={xscale=5},
+    time slot format=isodate,
+    today=\the\year-\the\month-\the\day,
+    today offset=.5,
+    today label=Current Date; \the\day-\the\month-\the\year,
+    today label node/.append style={anchor=north west},
+    today label font=\itshape\color{red},today rule/.style={draw=blue, ultra thick}
+ ]{2019-06-01}{2021-06-30}
+
+\gantttitlecalendar{year, month=name} \\
+
+% Foo
+\ganttbar{Task-F.0: Foo}{2019-10-01}{2021-05-15} \\
+
+% Bar
+\ganttbar{Task-B.1: Bar One}{2019-06-01}{2019-12-15} \\
+\ganttbar{Task-B.2: Bar Two}{2020-01-07}{2020-03-20} \\
+\ganttbar{Task-B.3: Bar Three}{2019-11-07}{2020-03-20} \\
+\ganttlinkedmilestone{\textbf{Milestone-B: Boo}}{2020-03-30} \\
+
+% Nuu
+\ganttlinkedbar{Task-N.1: Nuu One}{2020-04-10}{2020-07-06} \\
+\ganttbar{Task-N.2: Nuu Two}{2020-04-10}{2020-07-10} \\
+\ganttlinkedmilestone{\textbf{Milestone-N: Nuu}}{2020-07-20} \\
+
+% Task A
+\ganttbar{Task-A.1: TaskA One}{2019-06-01}{2019-12-15} \\
+\ganttbar{Task-A.2: TaskA Two}{2019-11-07}{2020-03-20} \\
+\ganttbar{Task-A.3: TaskA Three}{2020-02-07}{2020-03-20} \\
+\ganttlinkedmilestone{\textbf{Milestone-TaskA: TaskA}}{2020-03-30} \\
+
+% Task B
+\ganttlinkedbar{Task-B.1: TaskB One}{2020-04-10}{2020-07-06} \\
+\ganttbar{Task-B.2: TaskB Two}{2020-04-10}{2020-07-10} \\
+\ganttlinkedmilestone{\textbf{Milestone-TaskB: TaskB}}{2020-07-20} \\
+
+% Task C
+\ganttlinkedbar{Task-C.1: TaskC One}{2020-07-30}{2020-09-12} \\
+\ganttbar{Task-C.2: TaskC Two}{2020-08-06}{2020-10-13} \\
+\ganttbar{Task-C.3: TaskC Three}{2020-09-23}{2021-05-20} \\
+\ganttlinkedmilestone{\textbf{Milestone-TaskC: All done}}{2021-05-30}
+
+\end{ganttchart}
+\end{preview}
+\end{document}
